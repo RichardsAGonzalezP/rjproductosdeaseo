@@ -1,0 +1,9 @@
+{% extends 'catalogo/base.html' %}
+{% block content %}
+<h1>¿Estás seguro que deseas cerrar sesión?</h1>
+<form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Cerrar Sesión</button>
+    <a href="{% url 'index' %}">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,119 @@
+/* index.css */
+
+.welcome-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Ajusta la altura de la sección de bienvenida */
+    background: linear-gradient(135deg, #f8f9fa 25%, #e9ecef 75%); /* Fondo con degradado suave */
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-section::before {
+    content: "";
+    background: url("/static/catalogo/images/logo.png") no-repeat center center;
+    background-size: 70%; /* Ajusta el tamaño del logo para un mayor acercamiento */
+    opacity: 0.2; /* Ajusta la transparencia del logo de fondo */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; /* Ajusta el ancho del logo */
+    height: 100%; /* Ajusta la altura del logo */
+    z-index: 1;
+}
+
+.welcome-container {
+    text-align: center;
+    background: #ffffff; /* Fondo blanco para el contenedor */
+    padding: 2rem;
+    border-radius: 12px; /* Bordes más redondeados */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra suave */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: relative;
+    z-index: 2; /* Asegura que el contenido esté por encima del fondo */
+}
+
+.welcome-container:hover {
+    transform: translateY(-10px); /* Efecto de elevación al pasar el mouse */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+}
+
+.welcome-container h1 {
+    font-size: 2.5rem;
+    color: #333; /* Color de texto oscuro */
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.welcome-container p {
+    font-size: 1.25rem;
+    color: #555; /* Color de texto más claro */
+    margin-bottom: 0;
+}
+
+/* Detalles adicionales para los lados */
+.welcome-section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, rgba(248, 249, 250, 0.9) 25%, rgba(233, 236, 239, 0.9) 75%);
+    z-index: 0;
+}
+
+.welcome-section .detail-left,
+.welcome-section .detail-right {
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.welcome-section .detail-left {
+    left: 0;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.welcome-section .detail-right {
+    right: 0;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+/* Sección de productos */
+.products-section {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: #f8f9fa; /* Fondo claro */
+}
+
+.products-section h2 {
+    font-size: 2rem;
+    color: #333; /* Color de texto oscuro */
+    margin-bottom: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    animation: fadeInUp 1s ease-in-out;
+}
+
+/* Animación */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

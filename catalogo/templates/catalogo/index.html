@@ -1,0 +1,44 @@
+{% extends 'catalogo/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mx-auto px-4 py-12 common-container">
+    <div class="header-section text-center mb-12">
+        <img src="{% static 'catalogo/images/logo.png' %}" alt="Logo de la Empresa" class="company-logo img-fluid mx-auto d-block animate__animated animate__fadeInUp">
+        <h1 class="animate__animated animate__fadeInUp mt-4 text-4xl font-bold text-gray-900">Bienvenido a RJ Productos de Aseo</h1>
+    </div>
+    <div class="welcome-content mb-12">
+        <div class="card p-6 shadow-lg rounded-lg bg-white" data-aos="fade-up">
+            <p class="card-text text-gray-600 mt-4">Explora nuestros productos de alta calidad y encuentra lo que necesitas para mantener tu hogar limpio y fresco.</p>
+        </div>
+    </div>
+    <div class="text-center mb-12">
+        <a href="{% url 'catalogo' %}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded transition duration-300">Ver Catálogo</a>
+    </div>
+    <div class="productos-section text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Nuestros Productos</h2>
+        <div class="productos-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for producto in productos %}
+            <div class="producto-item" data-aos="fade-up">
+                <div class="card h-full p-6 shadow-lg rounded-lg bg-white flex flex-col items-center">
+                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="w-full h-48 object-cover mb-4">
+                    <div class="producto-content text-center">
+                        <h3 class="card-title text-xl font-semibold text-gray-800">{{ producto.nombre }}</h3>
+                        <p class="card-text text-gray-600 mt-2">{{ producto.descripcion }}</p>
+                        <p class="card-text text-gray-600 mt-2">${{ producto.precio }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'catalogo/css/index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'catalogo/js/index.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

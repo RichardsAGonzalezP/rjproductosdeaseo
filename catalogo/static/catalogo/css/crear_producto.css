@@ -1,0 +1,23 @@
+/* archivo: static/catalogo/css/crear_productos.css */
+
+input[type="text"],
+input[type="number"],
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px; /* Añadir padding para ajustar el texto */
+}
+
+textarea {
+    resize: none;
+}
+
+input[type="number"]::before {
+    content: "$";
+    position: absolute;
+    margin-left: 5px;
+}
+
+input[type="number"] {
+    padding-left: 20px; /* Espacio para el símbolo de peso */
+}

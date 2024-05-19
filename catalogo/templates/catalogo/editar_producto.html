@@ -1,0 +1,36 @@
+<!-- catalogo/templates/catalogo/editar_producto.html -->
+{% extends 'catalogo/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mx-auto px-4 py-12 common-container">
+    <h1 class="text-3xl font-bold text-center mb-6">Editar Producto</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-group">
+            <label for="imagenes">Imágenes:</label>
+            <input type="file" name="imagenes" id="imagenes" multiple>
+        </div>
+        <div class="formset-container mt-4">
+            {% for imagen in imagenes %}
+                <div class="form-row mb-4">
+                    <img src="{{ imagen.imagen.url }}" alt="Imagen de {{ producto.nombre }}" class="w-32 h-32 object-cover">
+                    <a href="{% url 'eliminar_imagen' imagen.id %}" class="ml-4 text-red-500">Eliminar</a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Guardar</button>
+            <a href="{% url 'admin_productos' %}" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'catalogo/css/crear_productos.css' %}">
+{% endblock %}
+{% block extra_js %}
+<script src="{% static 'catalogo/js/crear_productos.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

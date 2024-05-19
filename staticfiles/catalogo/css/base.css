@@ -1,0 +1,181 @@
+/* base.css */
+
+/* Importar la fuente de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif; /* Aplicar la nueva fuente a todo el sitio */
+}
+
+.navbar {
+    background-color: rgba(30, 30, 30, 0.9); /* Fondo gris oscuro cristalino */
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para el encabezado */
+    position: relative;
+    z-index: 10; /* Asegura que el encabezado esté por encima del contenido */
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    color: #ffffff; /* Letras blancas */
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: rgba(255, 255, 255, 0.9); /* Letras blancas casi opacas */
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    position: relative; /* Necesario para el efecto de subrayado */
+    padding: 0.5rem 1rem;
+}
+
+.navbar-nav .nav-item .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: #ff5733; /* Color del subrayado naranja */
+    transition: width 0.4s ease, right 0.4s ease;
+}
+
+.navbar-nav .nav-item .nav-link:hover::after {
+    width: 100%;
+    right: 0;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #ff5733; /* Letras color naranja al pasar el mouse */
+    transform: scale(1.1);
+}
+
+.navbar-nav .nav-item .nav-link.active {
+    color: #ff5733; /* Letras color naranja */
+}
+
+.form-inline {
+    display: inline;
+}
+
+.form-inline .btn-link {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.9); /* Letras blancas casi opacas */
+    padding: 0;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    position: relative; /* Necesario para el efecto de subrayado */
+}
+
+.form-inline .btn-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: #ff5733; /* Color del subrayado naranja */
+    transition: width 0.4s ease, right 0.4s ease;
+}
+
+.form-inline .btn-link:hover::after {
+    width: 100%;
+    right: 0;
+}
+
+.form-inline .btn-link:hover {
+    color: #ff5733; /* Letras color naranja al pasar el mouse */
+    transform: scale(1.1);
+    text-decoration: none;
+}
+
+.nav-item .form-inline {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.nav-item .form-inline .btn-link {
+    padding: 0.5rem 1rem;
+}
+
+/* Animaciones generales */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.navbar {
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Animaciones del encabezado */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+.header-slide-down {
+    animation: slideDown 0.5s forwards;
+}
+
+.header-slide-up {
+    animation: slideUp 0.5s forwards;
+}
+
+/* Animaciones del contenido principal */
+@keyframes fadeSlideInUpBlurScale {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+        filter: blur(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes fadeSlideOutUpBlurScale {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+        filter: blur(10px);
+    }
+}
+
+.page-transition-enter {
+    animation: fadeSlideInUpBlurScale 0.5s forwards;
+}
+
+.page-transition-leave {
+    animation: fadeSlideOutUpBlurScale 0.5s forwards;
+}

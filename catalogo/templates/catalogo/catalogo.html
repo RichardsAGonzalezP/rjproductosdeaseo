@@ -1,0 +1,18 @@
+{% extends 'catalogo/base.html' %}
+{% block content %}
+<h1>Catálogo de Productos</h1>
+<form method="get" action=".">
+    <input type="text" name="q" placeholder="Buscar productos...">
+    <button type="submit">Buscar</button>
+</form>
+{% for categoria in categorias %}
+<h2>{{ categoria.nombre }}</h2>
+<ul>
+    {% for producto in productos %}
+    {% if producto.categoria.id == categoria.id %}
+    <li>{{ producto.nombre }} - {{ producto.precio }}</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endfor %}
+{% endblock %}

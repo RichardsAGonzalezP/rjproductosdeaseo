@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RJ Productos de Aseo</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'catalogo/css/base.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="bg-gray-100">
+    <nav class="navbar bg-gray-900 text-white">
+        <div class="container mx-auto flex items-center justify-between py-4">
+            <div class="logo flex items-center">
+                <img src="{% static 'catalogo/images/logo.png' %}" alt="Logo de la Empresa" class="h-10 w-10 rounded-full animate__animated animate__fadeInDown">
+            </div>
+            <ul class="nav-links flex space-x-6">
+                <li><a href="{% url 'index' %}" class="nav-item hover:text-yellow-500 transition duration-300">Inicio</a></li>
+                <li><a href="{% url 'quienes-somos' %}" class="nav-item hover:text-yellow-500 transition duration-300">Quiénes Somos</a></li>
+                <li><a href="{% url 'catalogo' %}" class="nav-item hover:text-yellow-500 transition duration-300">Catálogo</a></li>
+                {% if user.is_authenticated %}
+                {% if user.is_staff %}
+                <li><a href="{% url 'admin_productos' %}" class="nav-item hover:text-yellow-500 transition duration-300">Administrar Productos</a></li>
+                <li><a href="{% url 'admin_categorias' %}" class="nav-item hover:text-yellow-500 transition duration-300">Administrar Categorías</a></li>
+                {% endif %}
+                <li><a href="{% url 'profile' %}" class="nav-item hover:text-yellow-500 transition duration-300">Perfil</a></li>
+                <li>
+                    <a href="{% url 'logout' %}" class="nav-item hover:text-yellow-500 transition duration-300">Cerrar Sesión</a>
+                </li>
+                {% else %}
+                <li><a href="{% url 'login' %}" class="nav-item hover:text-yellow-500 transition duration-300">Iniciar Sesión</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div class="main-content container" id="main-content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <script src="{% static 'catalogo/js/base.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1500,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
