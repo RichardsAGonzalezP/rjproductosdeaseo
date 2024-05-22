@@ -2,11 +2,11 @@
 {% load static %}
 {% block content %}
 <div class="container mx-auto px-4 py-12 common-container">
-    <h1 class="text-3xl font-bold text-center mb-6 animate__animated animate__fadeInDown">Administrar Productos</h1>
+    <h1 class="text-3xl font-bold text-center mb-6">Administrar Productos</h1>
     <div class="text-right mb-4">
-        <a href="{% url 'crear_producto' %}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300 animate__animated animate__bounceInRight">Crear Producto</a>
+        <a href="{% url 'crear_producto' %}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300">Crear Producto</a>
     </div>
-    <table class="min-w-full bg-white rounded-lg shadow-lg overflow-hidden animate__animated animate__fadeInUp">
+    <table class="min-w-full bg-white rounded-lg shadow-lg overflow-hidden">
         <thead class="bg-gray-800 text-white">
             <tr>
                 <th class="w-1/5 py-3 px-4 uppercase font-semibold text-sm">Producto</th>
@@ -18,52 +18,22 @@
         </thead>
         <tbody class="text-gray-700">
             {% for item in productos_con_imagenes %}
-                <tr class="border-b border-gray-200 transition duration-300 hover:bg-gray-100 animate__animated animate__fadeIn">
+                <tr class="border-b border-gray-200 transition duration-300 hover:bg-gray-100">
                     <td class="w-1/5 py-3 px-4">{{ item.producto.nombre }}</td>
                     <td class="w-1/5 py-3 px-4">{{ item.producto.categoria.nombre }}</td>
                     <td class="w-1/5 py-3 px-4">{{ item.producto.precio|floatformat:2 }}</td>
                     <td class="w-1/5 py-3 px-4">
                         {% for imagen in item.imagenes %}
-                            <img src="{{ imagen.imagen.url }}" alt="Imagen de {{ item.producto.nombre }}" class="w-16 h-16 object-cover inline-block mr-1 mb-1 rounded transition duration-300 transform hover:scale-110">
+                            <img src="{{ imagen.imagen.url }}" alt="Imagen de {{ item.producto.nombre }}" class="w-16 h-16 object-cover inline-block mr-1 mb-1 rounded">
                         {% endfor %}
                     </td>
                     <td class="w-1/5 py-3 px-4 flex items-center justify-around">
-                        <a href="{% url 'editar_producto' item.producto.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2 transition duration-300 transform hover:scale-105">Editar</a>
-                        <a href="{% url 'eliminar_producto' item.producto.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300 transform hover:scale-105">Eliminar</a>
+                        <a href="{% url 'editar_producto' item.producto.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">Editar</a>
+                        <a href="{% url 'eliminar_producto' item.producto.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Eliminar</a>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
-{% endblock %}
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'catalogo/css/admin_productos.css' %}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-{% endblock %}
-{% block extra_js %}
-<script src="{% static 'catalogo/js/admin_productos.js' %}"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const tableRows = document.querySelectorAll('tbody tr');
-        tableRows.forEach((row, index) => {
-            row.classList.add('animate__animated', 'animate__fadeInUp');
-            row.style.animationDelay = `${index * 0.1}s`;
-        });
-
-        // Añadir efectos hover a los botones
-        const buttons = document.querySelectorAll('a');
-        buttons.forEach(button => {
-            button.addEventListener('mouseenter', () => {
-                button.classList.add('animate__animated', 'animate__pulse');
-            });
-            button.addEventListener('mouseleave', () => {
-                button.classList.remove('animate__animated', 'animate__pulse');
-            });
-        });
-    });
-</script>
 {% endblock %}

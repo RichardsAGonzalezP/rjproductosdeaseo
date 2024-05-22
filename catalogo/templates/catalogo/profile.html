@@ -1,6 +1,14 @@
-{% extends 'catalogo/base.html' %}
+{% extends "catalogo/base.html" %}
+{% load static %}
+
 {% block content %}
-<h1>Perfil</h1>
-<p>Bienvenido, {{ user.username }}</p>
-<a href="{% url 'logout' %}">Cerrar Sesión</a>
+<div class="text-center py-8">
+    <h1 class="text-4xl font-bold text-gray-800">Perfil</h1>
+    <p class="text-xl text-gray-600 mt-4">Bienvenido, {{ user.username }}.</p>
+    <a href="{% url 'logout_confirm' %}" class="mt-4 inline-block p-2 bg-red-500 text-white rounded-md">Cerrar Sesión</a>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'catalogo/css/profile.css' %}">
 {% endblock %}

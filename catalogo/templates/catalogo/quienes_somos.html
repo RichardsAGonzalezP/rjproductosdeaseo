@@ -1,83 +1,57 @@
-{% extends 'catalogo/base.html' %}
+{% extends "catalogo/base.html" %}
 {% load static %}
+
 {% block content %}
-<div class="quienes-somos-container">
-    <div class="header-section text-center mb-12">
-        <img src="{% static 'catalogo/images/logo.png' %}" alt="Logo de la Empresa" class="company-logo img-fluid mx-auto d-block animate__animated animate__fadeInUp">
-        <h1 class="animate__animated animate__fadeInUp mt-4 text-4xl font-bold text-gray-900">Quiénes Somos</h1>
-    </div>
-    <div class="row content-section mb-12">
-        <div class="col-md-6 mission" data-aos="fade-right">
-            <div class="card p-6 shadow-lg rounded-lg bg-white">
-                <h2 class="card-title text-2xl font-semibold text-gray-800">Nuestra Misión</h2>
-                <p class="card-text text-gray-600 mt-4">Proporcionar productos de aseo de alta calidad que mejoren la limpieza y el bienestar de nuestros clientes.</p>
-            </div>
-        </div>
-        <div class="col-md-6 vision" data-aos="fade-left">
-            <div class="card p-6 shadow-lg rounded-lg bg-white">
-                <h2 class="card-title text-2xl font-semibold text-gray-800">Nuestra Visión</h2>
-                <p class="card-text text-gray-600 mt-4">Ser la empresa líder en el mercado de productos de aseo, reconocida por la calidad y la innovación de nuestros productos.</p>
-            </div>
-        </div>
-    </div>
-    <div class="values-section text-center">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8" data-aos="fade-up">Valores</h2>
-        <div class="values-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="value-item" data-aos="fade-up">
-                <div class="card h-full p-6 shadow-lg rounded-lg bg-white flex flex-col items-center">
-                    <div class="icon text-4xl text-yellow-500 mb-4"><i class="fas fa-star"></i></div>
-                    <div class="value-content text-center">
-                        <h3 class="card-title text-xl font-semibold text-gray-800">Calidad</h3>
-                        <p class="card-text text-gray-600 mt-2">Ofrecemos productos de la más alta calidad para garantizar la satisfacción de nuestros clientes.</p>
-                    </div>
+<div class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto py-20">
+        <div class="bg-white shadow-md rounded-lg p-10 text-center">
+            <img src="{% static 'catalogo/images/logo.png' %}" alt="Logo" class="h-20 w-20 mx-auto mb-4 rounded-full animate__animated animate__zoomIn">
+            <h1 class="text-4xl font-bold text-gray-800 animate__animated animate__fadeInDown">Quiénes Somos</h1>
+            <p class="mt-4 text-lg text-gray-600 animate__animated animate__fadeInUp">Somos una empresa dedicada a la comercialización de productos de aseo de alta calidad, comprometidos con el bienestar de nuestros clientes y el cuidado del medio ambiente.</p>
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-gray-200 p-4 rounded-lg shadow-md mission card animate__animated animate__fadeInLeft">
+                    <h2 class="text-2xl font-bold text-gray-800">Misión</h2>
+                    <p class="mt-2 text-lg text-gray-600">Nuestra misión es proporcionar productos de aseo de la más alta calidad para satisfacer las necesidades de nuestros clientes, promoviendo la higiene y el bienestar en cada hogar.</p>
+                </div>
+                <div class="bg-gray-200 p-4 rounded-lg shadow-md vision card animate__animated animate__fadeInRight">
+                    <h2 class="text-2xl font-bold text-gray-800">Visión</h2>
+                    <p class="mt-2 text-lg text-gray-600">Ser reconocidos como líderes en la industria de productos de aseo, ofreciendo soluciones innovadoras y sostenibles que contribuyan al cuidado del medio ambiente.</p>
                 </div>
             </div>
-            <div class="value-item" data-aos="fade-up" data-aos-delay="100">
-                <div class="card h-full p-6 shadow-lg rounded-lg bg-white flex flex-col items-center">
-                    <div class="icon text-4xl text-yellow-500 mb-4"><i class="fas fa-lightbulb"></i></div>
-                    <div class="value-content text-center">
-                        <h3 class="card-title text-xl font-semibold text-gray-800">Innovación</h3>
-                        <p class="card-text text-gray-600 mt-2">Nos mantenemos a la vanguardia con productos innovadores que cumplen con las necesidades del mercado.</p>
-                    </div>
+            <h2 class="text-3xl font-bold text-gray-800 mt-10 animate__animated animate__fadeInUp">Valores</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                <div class="bg-white p-6 rounded-lg shadow-lg value-box card animate__animated animate__zoomIn">
+                    <i class="fas fa-star text-4xl text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800">Calidad</h3>
+                    <p class="text-gray-600">Nos esforzamos por ofrecer productos de la más alta calidad.</p>
                 </div>
-            </div>
-            <div class="value-item" data-aos="fade-up" data-aos-delay="200">
-                <div class="card h-full p-6 shadow-lg rounded-lg bg-white flex flex-col items-center">
-                    <div class="icon text-4xl text-yellow-500 mb-4"><i class="fas fa-balance-scale"></i></div>
-                    <div class="value-content text-center">
-                        <h3 class="card-title text-xl font-semibold text-gray-800">Integridad</h3>
-                        <p class="card-text text-gray-600 mt-2">Actuamos con honestidad y transparencia en todas nuestras operaciones.</p>
-                    </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg value-box card animate__animated animate__zoomIn">
+                    <i class="fas fa-lightbulb text-4xl text-yellow-500 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800">Innovación</h3>
+                    <p class="text-gray-600">Buscamos constantemente nuevas formas de mejorar y crecer.</p>
                 </div>
-            </div>
-            <div class="value-item" data-aos="fade-up" data-aos-delay="300">
-                <div class="card h-full p-6 shadow-lg rounded-lg bg-white flex flex-col items-center">
-                    <div class="icon text-4xl text-yellow-500 mb-4"><i class="fas fa-handshake"></i></div>
-                    <div class="value-content text-center">
-                        <h3 class="card-title text-xl font-semibold text-gray-800">Responsabilidad</h3>
-                        <p class="card-text text-gray-600 mt-2">Nos comprometemos con la responsabilidad social y ambiental en todas nuestras actividades.</p>
-                    </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg value-box card animate__animated animate__zoomIn">
+                    <i class="fas fa-leaf text-4xl text-green-500 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800">Sostenibilidad</h3>
+                    <p class="text-gray-600">Nos comprometemos con el cuidado del medio ambiente en todos nuestros procesos.</p>
                 </div>
-            </div>
-            <div class="value-item" data-aos="fade-up" data-aos-delay="400">
-                <div class="card h-full p-6 shadow-lg rounded-lg bg-white flex flex-col items-center">
-                    <div class="icon text-4xl text-yellow-500 mb-4"><i class="fas fa-users"></i></div>
-                    <div class="value-content text-center">
-                        <h3 class="card-title text-xl font-semibold text-gray-800">Servicio al Cliente</h3>
-                        <p class="card-text text-gray-600 mt-2">Nos dedicamos a proporcionar un servicio al cliente excepcional y personalizado.</p>
-                    </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg value-box card animate__animated animate__zoomIn">
+                    <i class="fas fa-users text-4xl text-purple-500 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800">Trabajo en equipo</h3>
+                    <p class="text-gray-600">Fomentamos la colaboración y el trabajo en equipo para alcanzar nuestros objetivos.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg value-box card animate__animated animate__zoomIn">
+                    <i class="fas fa-handshake text-4xl text-teal-500 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800">Integridad</h3>
+                    <p class="text-gray-600">Actuamos con honestidad y ética en todas nuestras acciones.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg value-box card animate__animated animate__zoomIn">
+                    <i class="fas fa-globe text-4xl text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800">Responsabilidad social</h3>
+                    <p class="text-gray-600">Contribuimos al bienestar de la comunidad y al desarrollo sostenible.</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-{% endblock %}
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'catalogo/css/quienes_somos.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-{% endblock %}
-{% block extra_js %}
-    <script src="{% static 'catalogo/js/quienes_somos.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 {% endblock %}

@@ -1,4 +1,3 @@
-# views.py en catalogo/
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Producto, Categoria, ProductoImagen, Interes, Usuario
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -6,9 +5,8 @@ from .forms import ProductoForm, ProductoImagenForm, CategoriaForm
 from django.forms import modelformset_factory
 from django.contrib.auth import logout
 
-
 def index(request):
-    productos = Producto.objects.all()
+    productos = Producto.objects.all().order_by('?')[:4]  # Muestra 4 productos aleatorios
     return render(request, 'catalogo/index.html', {'productos': productos})
 
 def quienes_somos(request):
@@ -26,7 +24,6 @@ def catalogo(request):
 def profile(request):
     return render(request, 'catalogo/profile.html')
 
-
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def admin_productos(request):
@@ -38,7 +35,6 @@ def admin_productos(request):
         productos_con_imagenes.append({'producto': producto, 'imagenes': imagenes})
 
     return render(request, 'catalogo/admin_productos.html', {'productos_con_imagenes': productos_con_imagenes})
-
 
 @user_passes_test(lambda u: u.is_staff)
 @login_required

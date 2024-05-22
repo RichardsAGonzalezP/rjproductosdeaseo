@@ -1,99 +1,36 @@
 body {
-    font-family: 'Open Sans', sans-serif;
-    background: #f5f5f5;
-    margin: 0;
-    padding: 0;
-    color: #333;
+    font-family: 'Roboto', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Lora', serif;
+header .flex.items-center {
+    animation: fadeInDown 0.8s ease-in-out;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-}
-
-.navbar {
-    background: #333;
-    color: white;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.5s ease;
-}
-
-.logo img {
-    height: 50px;
+header .flex.items-center img {
     border-radius: 50%;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.logo img:hover {
-    transform: scale(1.1);
+header .flex.items-center img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
-.nav-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    flex-grow: 1;
+h1, h2 {
+    animation: fadeIn 1s ease-in-out;
 }
 
-.nav-links li {
-    margin-left: 20px;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.2rem;
-    transition: color 0.3s ease-in-out, transform 0.3s;
-}
-
-.nav-links a:hover {
-    color: #ff9800;
-    transform: scale(1.1);
-}
-
-.main-content {
-    padding-top: 120px;
-}
-
-.common-container {
-    text-align: center;
-    padding: 50px 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+p, .product-card {
     animation: fadeInUp 1s ease-in-out;
 }
 
-.background-logo {
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60%;
-    height: auto;
-    opacity: 0.15;
-    z-index: -1;
-}
-
-.card, .welcome-box {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-    width: 100%;
-}
-
-.card:hover, .welcome-box:hover {
-    transform: translateY(-10px);
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes fadeInDown {
@@ -118,37 +55,152 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-h1 {
-    font-size: 2.5em;
-    margin: 20px 0;
-    font-weight: 700;
+/* Estilos del menú lateral */
+#nav-content {
+    background: rgba(0, 0, 0, 0.8);
+    transition: all 0.5s ease-in-out;
 }
 
-p {
-    font-size: 1.2em;
+#nav-content ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
-a {
-    font-size: 1.2em;
-    font-weight: 700;
+#nav-content ul li {
+    margin-bottom: 1.5rem;
 }
 
-/* Custom scrollbar styles */
-body::-webkit-scrollbar {
+/* Estilos adicionales para animaciones */
+#nav-toggle {
+    transition: transform 0.3s ease-in-out;
+}
+
+#nav-toggle:hover {
+    transform: rotate(90deg);
+}
+
+#nav-content.flex {
+    display: flex !important;
+}
+
+/* Estilos para los enlaces del menú */
+.nav-item {
+    list-style: none;
+}
+
+.nav-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 1rem;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.nav-link:hover {
+    color: yellow;
+    transform: scale(1.05);
+}
+
+/* Animaciones de navegación */
+#nav-content.flex ul {
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
     width: 12px;
 }
 
-body::-webkit-scrollbar-track {
-    background: #f5f5f5;
-    border-radius: 10px;
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
 }
 
-body::-webkit-scrollbar-thumb {
-    background-color: #333;
-    border-radius: 10px;
-    border: 3px solid #f5f5f5;
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+    border: 3px solid #f1f1f1;
 }
 
-body::-webkit-scrollbar-thumb:hover {
-    background-color: #ff9800;
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Estilo para la página de Quienes Somos */
+.about-banner {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    position: relative;
+}
+
+.about-banner .container {
+    position: relative;
+    z-index: 10;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.about-banner .container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.about-content {
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.about-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.about-content p {
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+.animated-box {
+    animation: slideIn 1s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (min-width: 768px) {
+    .about-content .box {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .about-content .box div {
+        width: 48%;
+    }
 }

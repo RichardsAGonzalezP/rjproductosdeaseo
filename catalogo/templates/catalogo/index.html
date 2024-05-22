@@ -1,44 +1,71 @@
-{% extends 'catalogo/base.html' %}
+{% extends "catalogo/base.html" %}
 {% load static %}
+
 {% block content %}
-<div class="container mx-auto px-4 py-12 common-container">
-    <div class="header-section text-center mb-12">
-        <img src="{% static 'catalogo/images/logo.png' %}" alt="Logo de la Empresa" class="company-logo img-fluid mx-auto d-block animate__animated animate__fadeInUp">
-        <h1 class="animate__animated animate__fadeInUp mt-4 text-4xl font-bold text-gray-900">Bienvenido a RJ Productos de Aseo</h1>
+<div class="home-banner bg-cover bg-center text-black py-20 relative flex justify-center items-center">
+    <div class="container mx-auto text-center bg-white p-8 rounded-lg shadow-lg animate__animated animate__fadeIn">
+        <img src="{% static 'catalogo/images/logo.png' %}" alt="Logo" class="h-24 w-24 rounded-full mx-auto mb-4 transition-transform duration-300 hover:scale-110 animate__animated animate__bounceIn">
+        <h1 class="text-4xl font-bold animate__animated animate__fadeInUp">Bienvenidos a RJ Productos de Aseo</h1>
+        <p class="text-xl mt-4 animate__animated animate__fadeInUp animate__delay-1s">Los mejores productos para la limpieza y el cuidado de tu hogar.</p>
     </div>
-    <div class="welcome-content mb-12">
-        <div class="card p-6 shadow-lg rounded-lg bg-white" data-aos="fade-up">
-            <p class="card-text text-gray-600 mt-4">Explora nuestros productos de alta calidad y encuentra lo que necesitas para mantener tu hogar limpio y fresco.</p>
-        </div>
-    </div>
-    <div class="text-center mb-12">
-        <a href="{% url 'catalogo' %}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded transition duration-300">Ver Catálogo</a>
-    </div>
-    <div class="productos-section text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">Nuestros Productos</h2>
-        <div class="productos-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {% for producto in productos %}
-            <div class="producto-item" data-aos="fade-up">
-                <div class="card h-full p-6 shadow-lg rounded-lg bg-white flex flex-col items-center">
-                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="w-full h-48 object-cover mb-4">
-                    <div class="producto-content text-center">
-                        <h3 class="card-title text-xl font-semibold text-gray-800">{{ producto.nombre }}</h3>
-                        <p class="card-text text-gray-600 mt-2">{{ producto.descripcion }}</p>
-                        <p class="card-text text-gray-600 mt-2">${{ producto.precio }}</p>
+</div>
+<div class="container mx-auto py-8">
+    <h2 class="text-2xl font-bold text-center mb-6">Nuestros Productos</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {% for producto in productos %}
+            <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        {% for imagen in producto.imagenes.all %}
+                            <div class="swiper-slide">
+                                <img src="{{ imagen.imagen.url }}" alt="{{ producto.nombre }}" class="w-full h-48 object-contain">
+                            </div>
+                        {% endfor %}
                     </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- Add Navigation -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+                <div class="p-4">
+                    <h2 class="text-xl font-bold">{{ producto.nombre }}</h2>
+                    <p>{{ producto.descripcion }}</p>
+                    <p class="text-lg font-bold text-blue-600 mt-2">${{ producto.precio }}</p>
                 </div>
             </div>
-            {% endfor %}
-        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
+
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'catalogo/css/index.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<link rel="stylesheet" href="{% static 'catalogo/css/index.css' %}">
 {% endblock %}
+
 {% block extra_js %}
-    <script src="{% static 'catalogo/js/index.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var swipers = document.querySelectorAll('.swiper-container');
+        swipers.forEach(function(swiper) {
+            new Swiper(swiper, {
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+            });
+        });
+    });
+</script>
 {% endblock %}

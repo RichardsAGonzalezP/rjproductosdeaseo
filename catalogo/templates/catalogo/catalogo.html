@@ -1,18 +1,30 @@
-{% extends 'catalogo/base.html' %}
+{% extends "catalogo/base.html" %}
+{% load static %}
+
 {% block content %}
-<h1>Catálogo de Productos</h1>
-<form method="get" action=".">
-    <input type="text" name="q" placeholder="Buscar productos...">
-    <button type="submit">Buscar</button>
-</form>
-{% for categoria in categorias %}
-<h2>{{ categoria.nombre }}</h2>
-<ul>
-    {% for producto in productos %}
-    {% if producto.categoria.id == categoria.id %}
-    <li>{{ producto.nombre }} - {{ producto.precio }}</li>
-    {% endif %}
-    {% endfor %}
-</ul>
-{% endfor %}
+<div class="container mx-auto py-8">
+    <h1 class="text-4xl font-bold text-center mb-6">Catálogo de Productos</h1>
+    <div class="flex justify-center mb-8">
+        <form method="GET" action="{% url 'catalogo' %}" class="flex space-x-4">
+            <input type="text" name="q" placeholder="Buscar productos..." class="p-2 border border-gray-300 rounded-md">
+            <button type="submit" class="p-2 bg-blue-500 text-white rounded-md">Buscar</button>
+        </form>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {% for producto in productos %}
+            <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
+                <img src="{{ producto.imagenes.first.imagen.url }}" alt="{{ producto.nombre }}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-xl font-bold">{{ producto.nombre }}</h2>
+                    <p>{{ producto.descripcion }}</p>
+                    <p class="text-lg font-bold text-blue-600 mt-2">${{ producto.precio }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'catalogo/css/catalogo.css' %}">
 {% endblock %}

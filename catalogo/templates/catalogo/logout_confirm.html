@@ -1,11 +1,17 @@
 {% extends 'catalogo/base.html' %}
+{% load static %}
+
 {% block content %}
-<div class="logout-container">
-    <h1>¿Estás seguro que deseas cerrar sesión?</h1>
-    <form method="post" action="{% url 'logout' %}">
+<div class="container mx-auto text-center py-8">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">¿Estás seguro que deseas cerrar sesión?</h1>
+    <form method="post" action="{% url 'logout' %}" class="flex justify-center space-x-4">
         {% csrf_token %}
-        <button type="submit">Cerrar Sesión</button>
-        <a href="{% url 'index' %}">Cancelar</a>
+        <button type="submit" class="p-2 bg-red-500 text-white rounded-md">Cerrar Sesión</button>
+        <a href="{% url 'index' %}" class="p-2 bg-gray-500 text-white rounded-md">Cancelar</a>
     </form>
 </div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'catalogo/css/logout_confirm.css' %}">
 {% endblock %}

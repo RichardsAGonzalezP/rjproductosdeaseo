@@ -1,35 +1,35 @@
-document.addEventListener('DOMContentLoaded', function() {
-    AOS.init({
-        duration: 1500,
-        easing: 'ease-in-out',
-        once: true,
-        mirror: false
-    });
+document.getElementById('nav-toggle').onclick = function() {
+    var navContent = document.getElementById('nav-content');
+    navContent.classList.toggle('hidden');
+    navContent.classList.toggle('flex');
+}
 
-    // Hide loading spinner and show content when page is fully loaded
-    window.addEventListener('load', function() {
-        document.getElementById('loading-spinner').style.display = 'none';
-        document.querySelector('.main-content').classList.remove('hidden');
-    });
+document.getElementById('close-nav').onclick = function() {
+    var navContent = document.getElementById('nav-content');
+    navContent.classList.add('hidden');
+    navContent.classList.remove('flex');
+}
 
-    // Load content with AJAX
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            loadContent(this.getAttribute('href'));
-        });
-    });
-
-    function loadContent(url) {
-        fetch(url)
-            .then(response => response.text())
-            .then(data => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(data, 'text/html');
-                document.getElementById('main-content').innerHTML = doc.getElementById('main-content').innerHTML;
-                AOS.refresh();
-                window.history.pushState('', '', url);
-            })
-            .catch(error => console.error('Error loading content:', error));
+document.querySelectorAll('#nav-content .nav-link').forEach(link => {
+    link.onclick = function() {
+        var navContent = document.getElementById('nav-content');
+        navContent.classList.add('hidden');
+        navContent.classList.remove('flex');
     }
 });
+
+// Cambiar entre el menú de hamburguesa y el menú normal basado en el tamaño de la ventana
+function checkWindowSize() {
+    var navContent = document.getElementById('nav-content');
+    var mainNav = document.getElementById('main-nav');
+    if (window.innerWidth >= 1024) {
+        navContent.classList.add('hidden');
+        navContent.classList.remove('flex');
+        mainNav.classList.remove('hidden');
+    } else {
+        mainNav.classList.add('hidden');
+    }
+}
+
+window.onresize = checkWindowSize;
+window.onload = checkWindowSize;

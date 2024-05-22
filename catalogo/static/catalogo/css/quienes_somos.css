@@ -1,139 +1,48 @@
+/* Estilos generales */
 body {
-    font-family: 'Open Sans', sans-serif;
-    background: #f5f5f5;
-    margin: 0;
-    padding: 0;
-    color: #333;
+    font-family: 'Roboto', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Lora', serif;
+header .flex.items-center {
+    animation: fadeInDown 0.8s ease-in-out;
 }
 
-.quienes-somos-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px; /* Ajuste del padding */
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.company-logo {
-    width: 80px; /* Ajuste del tamaño del logo */
-    height: auto;
+header .flex.items-center img {
     border-radius: 50%;
-    animation: bounce 2s infinite;
-    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
+header .flex.items-center img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+h1, h2 {
+    animation: fadeIn 1s ease-in-out;
+}
+
+p, .card {
+    animation: fadeInUp 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
         transform: translateY(0);
     }
-    40% {
-        transform: translateY(-10px);
-    }
-    60% {
-        transform: translateY(-5px);
-    }
-}
-
-.content-section {
-    display: flex;
-    justify-content: space-between;
-    text-align: left;
-    padding: 0 10px; /* Ajuste del padding */
-    margin-bottom: 30px; /* Ajuste del margen */
-}
-
-.mission, .vision {
-    width: 48%;
-    display: flex;
-    justify-content: center;
-}
-
-.card {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 15px; /* Ajuste del padding */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    width: 100%;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.card h2 {
-    font-size: 1.8em; /* Ajuste del tamaño de fuente */
-    margin-top: 15px;
-    color: #2c3e50;
-    text-align: center;
-}
-
-.card p {
-    font-size: 1.1em; /* Ajuste del tamaño de fuente */
-    line-height: 1.6;
-    margin-bottom: 15px;
-    color: #34495e;
-}
-
-.values-section {
-    margin-top: 30px; /* Ajuste del margen */
-}
-
-.values-section h2 {
-    font-size: 2.2em; /* Ajuste del tamaño de fuente */
-    color: #2c3e50;
-    margin-bottom: 15px; /* Ajuste del margen */
-}
-
-.values-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px; /* Ajuste del gap */
-}
-
-.value-item {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 15px; /* Ajuste del padding */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    width: 30%; /* Ajuste del ancho */
-    display: flex;
-    align-items: center;
-}
-
-.value-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.icon {
-    font-size: 2em; /* Ajuste del tamaño de fuente */
-    color: #ff9800;
-    margin-right: 10px; /* Ajuste del margen */
-}
-
-.value-content {
-    text-align: left;
-}
-
-.value-content h3 {
-    font-size: 1.4em; /* Ajuste del tamaño de fuente */
-    color: #2c3e50;
-    margin: 0 0 10px 0;
-}
-
-.value-content p {
-    font-size: 1em; /* Ajuste del tamaño de fuente */
-    color: #34495e;
 }
 
 @keyframes fadeInUp {
@@ -145,4 +54,37 @@ h1, h2, h3, h4, h5, h6 {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.card {
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-icon {
+    font-size: 3rem;
+    color: #4A90E2;
+    margin-bottom: 1rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.7);
 }

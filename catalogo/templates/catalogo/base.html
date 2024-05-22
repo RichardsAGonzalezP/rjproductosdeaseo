@@ -1,53 +1,130 @@
-{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RJ Productos de Aseo</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'catalogo/css/base.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    {% block extra_css %}{% endblock %}
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="{% static 'catalogo/css/base.css' %}">
+    {% block extra_css %}
+    {% endblock %}
 </head>
-<body class="bg-gray-100">
-    <nav class="navbar bg-gray-900 text-white">
-        <div class="container mx-auto flex items-center justify-between py-4">
-            <div class="logo flex items-center">
-                <img src="{% static 'catalogo/images/logo.png' %}" alt="Logo de la Empresa" class="h-10 w-10 rounded-full animate__animated animate__fadeInDown">
+<body class="bg-gray-100 text-gray-800 font-roboto">
+    <header id="header" class="bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg fixed w-full z-10 top-0 left-0">
+        <div class="container mx-auto flex justify-between items-center py-2 px-4">
+            <div class="flex items-center">
+                <img src="{% static 'catalogo/images/logo.png' %}" alt="Logo" class="h-10 w-10 rounded-full transition-transform duration-300 hover:scale-110">
+                <span id="company-name" class="ml-3 text-lg font-bold">RJ Productos de Aseo</span>
             </div>
-            <ul class="nav-links flex space-x-6">
-                <li><a href="{% url 'index' %}" class="nav-item hover:text-yellow-500 transition duration-300">Inicio</a></li>
-                <li><a href="{% url 'quienes-somos' %}" class="nav-item hover:text-yellow-500 transition duration-300">Quiénes Somos</a></li>
-                <li><a href="{% url 'catalogo' %}" class="nav-item hover:text-yellow-500 transition duration-300">Catálogo</a></li>
+            <nav id="main-nav" class="hidden lg:flex space-x-4 mx-auto">
+                <a href="/" class="nav-link">Inicio</a>
+                <a href="/quienes-somos/" class="nav-link">Quiénes Somos</a>
+                <a href="/catalogo/" class="nav-link">Catálogo</a>
                 {% if user.is_authenticated %}
-                {% if user.is_staff %}
-                <li><a href="{% url 'admin_productos' %}" class="nav-item hover:text-yellow-500 transition duration-300">Administrar Productos</a></li>
-                <li><a href="{% url 'admin_categorias' %}" class="nav-item hover:text-yellow-500 transition duration-300">Administrar Categorías</a></li>
-                {% endif %}
-                <li><a href="{% url 'profile' %}" class="nav-item hover:text-yellow-500 transition duration-300">Perfil</a></li>
-                <li>
-                    <a href="{% url 'logout' %}" class="nav-item hover:text-yellow-500 transition duration-300">Cerrar Sesión</a>
-                </li>
+                    <a href="/profile/" class="nav-link">Perfil</a>
+                    <a href="/admin-productos/" class="nav-link">Administrar Productos</a>
+                    <a href="/admin-categorias/" class="nav-link">Administrar Categorías</a>
+                    <a href="/logout_confirm/" class="nav-link">Cerrar Sesión</a>
                 {% else %}
-                <li><a href="{% url 'login' %}" class="nav-item hover:text-yellow-500 transition duration-300">Iniciar Sesión</a></li>
+                    <a href="/login/" class="nav-link">Iniciar Sesión</a>
                 {% endif %}
-            </ul>
+            </nav>
+            <button id="nav-toggle" class="lg:hidden px-2 py-1 border rounded text-white border-white hover:text-white hover:border-white transition duration-300 transform hover:scale-110">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
+    </header>
+    <nav id="nav-content" class="fixed top-0 left-0 w-full h-full bg-blue-600 bg-opacity-90 z-20 hidden flex-col justify-center items-center lg:hidden">
+        <button id="close-nav" class="absolute top-4 right-4 text-white text-2xl">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="space-y-6 text-center">
+            <li class="nav-item"><a href="/" class="nav-link">Inicio</a></li>
+            <li class="nav-item"><a href="/quienes-somos/" class="nav-link">Quiénes Somos</a></li>
+            <li class="nav-item"><a href="/catalogo/" class="nav-link">Catálogo</a></li>
+            {% if user.is_authenticated %}
+                <li class="nav-item"><a href="/profile/" class="nav-link">Perfil</a></li>
+                <li class="nav-item"><a href="/admin-productos/" class="nav-link">Administrar Productos</a></li>
+                <li class="nav-item"><a href="/admin-categorias/" class="nav-link">Administrar Categorías</a></li>
+                <li class="nav-item"><a href="/logout_confirm/" class="nav-link">Cerrar Sesión</a></li>
+            {% else %}
+                <li class="nav-item"><a href="/login/" class="nav-link">Iniciar Sesión</a></li>
+            {% endif %}
+        </ul>
     </nav>
-    <div class="main-content container" id="main-content">
-        {% block content %}
-        {% endblock %}
-    </div>
-    <script src="{% static 'catalogo/js/base.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <main id="barba-wrapper" class="container mx-auto py-24 lg:py-8">
+        <div class="barba-container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+    <footer class="bg-gray-800 text-white py-4 fixed bottom-0 w-full">
+        <p class="text-center">&copy; 2024 RJ Productos de Aseo. Todos los derechos reservados.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"></script>
     <script>
-        AOS.init({
-            duration: 1500,
-            easing: 'ease-in-out',
-            once: true,
-            mirror: false
+        document.getElementById('nav-toggle').onclick = function() {
+            var navContent = document.getElementById('nav-content');
+            navContent.classList.toggle('hidden');
+            navContent.classList.toggle('flex');
+        }
+
+        document.getElementById('close-nav').onclick = function() {
+            var navContent = document.getElementById('nav-content');
+            navContent.classList.add('hidden');
+            navContent.classList.remove('flex');
+        }
+
+        document.querySelectorAll('#nav-content .nav-link').forEach(link => {
+            link.onclick = function() {
+                var navContent = document.getElementById('nav-content');
+                navContent.classList.add('hidden');
+                navContent.classList.remove('flex');
+            }
+        });
+
+        function checkWindowSize() {
+            var navContent = document.getElementById('nav-content');
+            var mainNav = document.getElementById('main-nav');
+            if (window.innerWidth >= 1024) {
+                navContent.classList.add('hidden');
+                navContent.classList.remove('flex');
+                mainNav.classList.remove('hidden');
+            } else {
+                mainNav.classList.add('hidden');
+            }
+        }
+
+        window.onresize = checkWindowSize;
+        window.onload = checkWindowSize;
+
+        // Barba.js transitions
+        barba.init({
+            transitions: [{
+                name: 'modern-transition',
+                leave(data) {
+                    return gsap.to(data.current.container, {
+                        opacity: 0,
+                        duration: 0.3,
+                        onComplete: () => data.current.container.remove()
+                    });
+                },
+                enter(data) {
+                    return gsap.from(data.next.container, {
+                        opacity: 0,
+                        duration: 0.3
+                    });
+                }
+            }]
         });
     </script>
-    {% block extra_js %}{% endblock %}
+    {% block extra_js %}
+    {% endblock %}
 </body>
 </html>
