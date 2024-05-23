@@ -2,29 +2,163 @@
 {% load static %}
 
 {% block content %}
-<div class="container mx-auto py-8">
-    <h1 class="text-4xl font-bold text-center mb-6">Catálogo de Productos</h1>
-    <div class="flex justify-center mb-8">
-        <form method="GET" action="{% url 'catalogo' %}" class="flex space-x-4">
-            <input type="text" name="q" placeholder="Buscar productos..." class="p-2 border border-gray-300 rounded-md">
-            <button type="submit" class="p-2 bg-blue-500 text-white rounded-md">Buscar</button>
-        </form>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {% for producto in productos %}
-            <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-                <img src="{{ producto.imagenes.first.imagen.url }}" alt="{{ producto.nombre }}" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h2 class="text-xl font-bold">{{ producto.nombre }}</h2>
-                    <p>{{ producto.descripcion }}</p>
-                    <p class="text-lg font-bold text-blue-600 mt-2">${{ producto.precio }}</p>
-                </div>
+<div class="bg-gray-100 min-h-screen pt-12">
+    <div class="container mx-auto py-8">
+        <h1 id="catalogo-title" class="text-4xl font-bold text-center mb-8">Catálogo</h1>
+
+        <!-- Filtros de categorías -->
+        <div class="text-center mb-8">
+            <div class="relative inline-block">
+                <button id="filterButton" class="bg-blue-500 text-white px-4 py-2 rounded-lg filter-button">Filtrar Categorías</button>
+                <ul id="filterMenu" class="absolute hidden bg-white shadow-lg rounded-lg mt-2 z-10 filter-options">
+                    <li data-filter="all">Todos</li>
+                    {% for categoria in categorias %}
+                        <li data-filter="{{ categoria.id }}">{{ categoria.nombre }}</li>
+                    {% endfor %}
+                </ul>
             </div>
-        {% endfor %}
+        </div>
+
+        <!-- Productos -->
+        <div id="productosContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {% for producto in productos %}
+                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105" data-category="{{ producto.categoria.id }}">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            {% for imagen in producto.imagenes.all %}
+                                <div class="swiper-slide">
+                                    <img src="{{ imagen.imagen.url }}" alt="{{ producto.nombre }}" class="w-full h-48 object-contain product-image">
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination"></div>
+                        <!-- Add Navigation -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="p-4">
+                        <h2 class="text-lg font-bold">{{ producto.nombre }}</h2>
+                        <p class="description">{{ producto.descripcion }}</p>
+                        <p class="price text-blue-600">${{ producto.precio }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
+</div>
+
+<!-- Modal de visualización de imagen -->
+<div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
 </div>
 {% endblock %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 <link rel="stylesheet" href="{% static 'catalogo/css/catalogo.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function initializeSwipers() {
+            var swipers = document.querySelectorAll('.swiper-container');
+            swipers.forEach(function(swiper) {
+                new Swiper(swiper, {
+                    loop: true,
+                    pagination: {
+                        el: swiper.querySelector('.swiper-pagination'),
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: swiper.querySelector('.swiper-button-next'),
+                        prevEl: swiper.querySelector('.swiper-button-prev'),
+                    },
+                    autoplay: {
+                        delay: 2000, // Duración ajustada para la primera imagen
+                        disableOnInteraction: false,
+                    },
+                });
+            });
+        }
+
+        // Inicializar Swiper al cargar la página
+        initializeSwipers();
+
+        // Modal de visualización de imagen
+        var modal = document.getElementById("myModal");
+        var modalImg = document.getElementById("img01");
+
+        document.querySelectorAll('.product-image').forEach(img => {
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            }
+        });
+
+        var span = document.getElementsByClassName("close")[0];
+        span.onclick = function() { 
+            modal.style.display = "none";
+        }
+
+        // Cerrar el modal cuando se hace clic fuera de la imagen
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Mostrar/Ocultar opciones de filtro
+        var filterButton = document.getElementById('filterButton');
+        var filterMenu = document.getElementById('filterMenu');
+        filterButton.addEventListener('click', function() {
+            filterMenu.classList.toggle('hidden');
+        });
+
+        // Filtros de categorías
+        var currentCategory = 'all';
+        document.querySelectorAll('.filter-options li').forEach(li => {
+            li.addEventListener('click', function() {
+                var filter = this.getAttribute('data-filter');
+                currentCategory = filter;
+                document.querySelectorAll('.product-card').forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeIn 0.5s ease-in-out';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                filterMenu.classList.add('hidden');
+                if (filter === 'all') {
+                    updateFilterButtonText('Filtrar Categorías');
+                } else {
+                    updateFilterButtonText(this.textContent);
+                }
+                initializeSwipers(); // Volver a inicializar Swiper después de filtrar
+            });
+        });
+
+        function updateFilterButtonText(text) {
+            filterButton.textContent = text;
+        }
+
+        // Cerrar el menú de filtro al hacer clic fuera de él
+        document.addEventListener('click', function(event) {
+            if (!filterButton.contains(event.target) && !filterMenu.contains(event.target)) {
+                filterMenu.classList.add('hidden');
+            }
+        });
+
+        // Desactivar la posición de desplazamiento en la recarga
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        window.scrollTo(0, 0);
+    });
+</script>
 {% endblock %}

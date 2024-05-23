@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Desactivar la posición de desplazamiento en la recarga
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+
+    window.scrollTo(0, 0);
+
     AOS.init({
         duration: 2000,
         once: true,
