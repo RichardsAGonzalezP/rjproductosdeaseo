@@ -5,7 +5,7 @@
 <div class="bg-gray-100 min-h-screen">
     <div class="container mx-auto py-32">
         <div class="bg-white shadow-md rounded-lg p-10 text-center">
-            <img src="{% static 'catalogo/images/logo.png' %}" alt="Logo" class="h-20 w-20 mx-auto mb-4 rounded-full logo">
+            <img src="{% static 'catalogo/images/logo.png' %}" alt="Logo" class="h-20 w-20 mx-auto mb-4 rounded-full logo animate__animated animate__fadeIn">
             <h1 class="text-4xl font-bold text-gray-800 animate__animated">Quiénes Somos</h1>
             <p class="mt-4 text-lg text-gray-600 animate__animated">Somos una empresa dedicada a la comercialización de productos de aseo de alta calidad, comprometidos con el bienestar de nuestros clientes y el cuidado del medio ambiente.</p>
             <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -18,7 +18,7 @@
                     <p class="mt-2 text-lg text-gray-600">Ser reconocidos como líderes en la industria de productos de aseo, ofreciendo soluciones innovadoras y sostenibles que contribuyan al cuidado del medio ambiente.</p>
                 </div>
             </div>
-            <h2 class="text-3xl font-bold text-gray-800 mt-10 animate__animated">Valores</h2>
+            <h2 class="text-3xl font-bold text-gray-800 mt-10 animate__animated animate__fadeInUp">Valores</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
                 <div class="bg-white p-6 rounded-lg shadow-lg value-box card animate__animated">
                     <i class="fas fa-star text-4xl text-blue-500 mb-4"></i>
@@ -71,12 +71,12 @@
         const timeline = gsap.timeline({ defaults: { ease: "power1.out" } });
 
         // Animaciones para el logo
-        timeline.from('.logo', { opacity: 0, scale: 0, duration: 1, rotate: 360 });
-        timeline.from('.animate__fadeInDown', { y: -50, opacity: 0, duration: 1 }, "-=0.5");
-        timeline.from('.animate__fadeInUp', { y: 50, opacity: 0, duration: 1 }, "-=0.5");
-        timeline.from('.mission', { x: -100, opacity: 0, duration: 1 }, "-=0.5");
-        timeline.from('.vision', { x: 100, opacity: 0, duration: 1 }, "-=0.5");
-        timeline.from('.value-box', { scale: 0.5, opacity: 0, stagger: 0.2, duration: 1 }, "-=0.5");
+        timeline.from('.logo', { opacity: 0, scale: 0, duration: 1 });
+        timeline.from('.animate__fadeInDown', { y: -20, opacity: 0, duration: 1 }, "-=0.5");
+        timeline.from('.animate__fadeInUp', { y: 20, opacity: 0, duration: 1 }, "-=0.5");
+        timeline.from('.mission', { opacity: 0, scale: 0.8, duration: 1 }, "-=0.5");
+        timeline.from('.vision', { opacity: 0, scale: 0.8, duration: 1 }, "-=0.5");
+        timeline.from('.value-box', { opacity: 0, scale: 0.8, stagger: 0.2, duration: 1 }, "-=0.5");
 
         // Animación constante para el logo
         gsap.to('.logo', {
@@ -87,14 +87,14 @@
             ease: "sine.inOut"
         });
 
-        // Animaciones hover
+        // Efecto suave en las tarjetas
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {
             card.addEventListener('mouseenter', function() {
-                gsap.to(card, { scale: 1.05, duration: 0.3, boxShadow: '0 15px 25px rgba(0, 0, 0, 0.2)' });
+                gsap.to(card, { scale: 1.03, duration: 0.5, boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2)' });
             });
             card.addEventListener('mouseleave', function() {
-                gsap.to(card, { scale: 1, duration: 0.3, boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' });
+                gsap.to(card, { scale: 1, duration: 0.5, boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' });
             });
         });
     });
