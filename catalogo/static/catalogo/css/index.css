@@ -3,14 +3,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black; /* Cambiado a negro */
+    color: black;
     position: relative;
 }
 
 .home-banner .container {
     position: relative;
     z-index: 10;
-    background: white; /* Cambiado a blanco */
+    background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -24,8 +24,9 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajustado a 300px */
     gap: 1rem;
+    padding: 0 1rem;
 }
 
 .product-card {
@@ -34,6 +35,8 @@
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
+    max-width: 300px; /* Ajustado a 300px */
+    margin: 0 auto;
 }
 
 .product-card:hover {
@@ -42,13 +45,13 @@
 
 .product-card .swiper-container {
     width: 100%;
-    height: 200px;
+    height: 250px; /* Ajustado a 250px */
 }
 
 .product-card img {
     width: 100%;
-    height: 200px;
-    object-fit: contain; /* Cambiado de cover a contain */
+    height: 250px; /* Ajustado a 250px */
+    object-fit: contain;
 }
 
 .product-card .content {
@@ -56,16 +59,17 @@
 }
 
 .product-card h2 {
-    font-size: 1.5rem;
+    font-size: 1.6rem; /* Ajustado a 1.6rem */
     margin: 0;
 }
 
 .product-card p {
     color: #555;
+    font-size: 1.2rem; /* Ajustado a 1.2rem */
 }
 
 .product-card .price {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: bold;
     color: #333;
     margin-top: 0.5rem;
@@ -87,4 +91,52 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+/* Estilos para el modal de visualización de imagen */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 9999; 
+    padding-top: 60px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.9); 
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+.modal-content, #caption {
+    animation: zoom 0.6s;
+}
+
+@keyframes zoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
 }

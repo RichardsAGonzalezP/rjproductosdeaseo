@@ -4,7 +4,7 @@
 {% block content %}
 <div class="home-banner bg-cover bg-center text-black py-20 relative flex justify-center items-center">
     <div class="container mx-auto text-center bg-white p-8 rounded-lg shadow-lg animate__animated animate__fadeIn">
-        <img src="{% static 'catalogo/images/logo.png' %}" alt="Logo" class="h-24 w-24 rounded-full mx-auto mb-4 transition-transform duration-300 hover:scale-110 animate__animated animate__bounceIn">
+        <img src="{% static 'catalogo/images/logo.png' %}" alt="Logo" class="h-24 w-24 rounded-full mx-auto mb-4 logo">
         <h1 class="text-4xl font-bold animate__animated animate__fadeInUp">Bienvenidos a RJ Productos de Aseo</h1>
         <p class="text-xl mt-4 animate__animated animate__fadeInUp animate__delay-1s">Los mejores productos para la limpieza y el cuidado de tu hogar.</p>
     </div>
@@ -18,7 +18,7 @@
                     <div class="swiper-wrapper">
                         {% for imagen in producto.imagenes.all %}
                             <div class="swiper-slide">
-                                <img src="{{ imagen.imagen.url }}" alt="{{ producto.nombre }}" class="w-full h-48 object-contain">
+                                <img src="{{ imagen.imagen.url }}" alt="{{ producto.nombre }}" class="w-full h-48 object-contain product-image">
                             </div>
                         {% endfor %}
                     </div>
@@ -29,13 +29,25 @@
                     <div class="swiper-button-prev"></div>
                 </div>
                 <div class="p-4">
-                    <h2 class="text-xl font-bold">{{ producto.nombre }}</h2>
+                    <h2 class="text-lg font-bold">{{ producto.nombre }}</h2>
                     <p>{{ producto.descripcion }}</p>
-                    <p class="text-lg font-bold text-blue-600 mt-2">${{ producto.precio }}</p>
+                    <p class="text-base font-bold text-blue-600 mt-2">${{ producto.precio }}</p>
                 </div>
             </div>
         {% endfor %}
     </div>
+</div>
+<div class="container mx-auto py-8 text-center">
+    <h2 class="text-2xl font-bold mb-4">Síguenos en nuestras redes sociales</h2>
+    <a href="https://www.instagram.com/rj_productosdeaseo?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="text-pink-500 text-4xl hover:text-pink-700 transition duration-300">
+        <i class="fab fa-instagram"></i>
+    </a>
+</div>
+
+<!-- Modal de visualización de imagen -->
+<div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
 </div>
 {% endblock %}
 
@@ -46,19 +58,45 @@
 
 {% block extra_js %}
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+            duration: 2000,
+            once: true,
+            easing: 'ease-in-out',
+        });
+
+        // GSAP animations
+        const timeline = gsap.timeline({ defaults: { ease: "power1.out" } });
+
+        // Animaciones para el logo
+        timeline.from('.logo', { opacity: 0, scale: 0, duration: 1, rotate: 360 });
+        timeline.from('.text-4xl', { y: -50, opacity: 0, duration: 1 }, "-=0.5");
+        timeline.from('.text-xl', { y: 50, opacity: 0, duration: 1 }, "-=0.5");
+
+        // Animación constante para el logo
+        gsap.to('.logo', {
+            y: -10,
+            duration: 1,
+            yoyo: true,
+            repeat: -1,
+            ease: "sine.inOut"
+        });
+
+        // Inicializar Swiper
         var swipers = document.querySelectorAll('.swiper-container');
         swipers.forEach(function(swiper) {
             new Swiper(swiper, {
                 loop: true,
                 pagination: {
-                    el: '.swiper-pagination',
+                    el: swiper.querySelector('.swiper-pagination'),
                     clickable: true,
                 },
                 navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+                    nextEl: swiper.querySelector('.swiper-button-next'),
+                    prevEl: swiper.querySelector('.swiper-button-prev'),
                 },
                 autoplay: {
                     delay: 3000,
@@ -66,6 +104,29 @@
                 },
             });
         });
+
+        // Modal de visualización de imagen
+        var modal = document.getElementById("myModal");
+        var modalImg = document.getElementById("img01");
+
+        document.querySelectorAll('.product-image').forEach(img => {
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            }
+        });
+
+        var span = document.getElementsByClassName("close")[0];
+        span.onclick = function() { 
+            modal.style.display = "none";
+        }
+
+        // Cerrar el modal cuando se hace clic fuera de la imagen
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     });
 </script>
 {% endblock %}

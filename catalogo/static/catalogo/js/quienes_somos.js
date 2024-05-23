@@ -1,43 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.from(".main-title", {
-        duration: 1.5,
-        opacity: 0,
-        y: -50,
-        ease: "power3.out",
-        scrollTrigger: {
-            trigger: ".main-title",
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
-        },
+    AOS.init({
+        duration: 2000,
+        once: true,
+        easing: 'ease-in-out',
     });
 
-    gsap.from(".description-text", {
-        duration: 1.5,
-        opacity: 0,
-        y: 50,
-        ease: "power3.out",
-        scrollTrigger: {
-            trigger: ".description-text",
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
-        },
-    });
+    // GSAP animations
+    const timeline = gsap.timeline({ defaults: { ease: "power1.out" } });
 
-    gsap.from(".card", {
-        duration: 1.5,
-        opacity: 0,
-        y: 50,
-        stagger: 0.3,
-        ease: "power3.out",
-        scrollTrigger: {
-            trigger: ".card",
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
-        },
+    timeline.from('.animate__animated.animate__zoomIn', { opacity: 0, scale: 0, duration: 1 });
+    timeline.from('.animate__animated.animate__fadeInDown', { y: -50, opacity: 0, duration: 1 }, "-=0.5");
+    timeline.from('.animate__animated.animate__fadeInUp', { y: 50, opacity: 0, duration: 1 }, "-=0.5");
+    timeline.from('.mission', { x: -100, opacity: 0, duration: 1 }, "-=0.5");
+    timeline.from('.vision', { x: 100, opacity: 0, duration: 1 }, "-=0.5");
+    timeline.from('.value-box', { scale: 0.5, opacity: 0, stagger: 0.2, duration: 1 }, "-=0.5");
+
+    // Efecto 3D en las tarjetas
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            gsap.to(card, { rotationY: 15, rotationX: 15, z: 10, duration: 0.3, boxShadow: '0 15px 25px rgba(0, 0, 0, 0.2)' });
+        });
+        card.addEventListener('mouseleave', function() {
+            gsap.to(card, { rotationY: 0, rotationX: 0, z: 0, duration: 0.3, boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' });
+        });
     });
 });

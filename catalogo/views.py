@@ -13,12 +13,19 @@ def quienes_somos(request):
     return render(request, 'catalogo/quienes_somos.html')
 
 def catalogo(request):
-    query = request.GET.get('q')
     categorias = Categoria.objects.all()
-    productos = Producto.objects.all()
-    if query:
-        productos = productos.filter(nombre__icontains=query)
-    return render(request, 'catalogo/catalogo.html', {'categorias': categorias, 'productos': productos})
+    categoria_id = request.GET.get('categoria', None)
+    
+    if categoria_id:
+        productos = Producto.objects.filter(categoria_id=categoria_id)
+    else:
+        productos = Producto.objects.all()
+        
+    return render(request, 'catalogo/catalogo.html', {
+        'productos': productos,
+        'categorias': categorias,
+        'categoria_id': categoria_id,
+    })
 
 @login_required
 def profile(request):

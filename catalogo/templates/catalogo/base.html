@@ -9,18 +9,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="{% static 'catalogo/css/base.css' %}">
     {% block extra_css %}
     {% endblock %}
 </head>
 <body class="bg-gray-100 text-gray-800 font-roboto">
-    <header id="header" class="bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg fixed w-full z-10 top-0 left-0">
+    <header id="header" class="bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg fixed w-full z-10 top-0 left-0 animate__animated animate__fadeInDown">
         <div class="container mx-auto flex justify-between items-center py-2 px-4">
             <div class="flex items-center">
-                <img src="{% static 'catalogo/images/logo.png' %}" alt="Logo" class="h-10 w-10 rounded-full transition-transform duration-300 hover:scale-110">
+                <img src="{% static 'catalogo/images/logo.png' %}" alt="Logo" class="h-10 w-10 rounded-full transform transition-transform duration-300 hover:scale-110">
                 <span id="company-name" class="ml-3 text-lg font-bold">RJ Productos de Aseo</span>
             </div>
-            <nav id="main-nav" class="hidden lg:flex space-x-4 mx-auto">
+            <nav id="main-nav" class="hidden lg:flex space-x-4">
                 <a href="/" class="nav-link">Inicio</a>
                 <a href="/quienes-somos/" class="nav-link">Quiénes Somos</a>
                 <a href="/catalogo/" class="nav-link">Catálogo</a>
@@ -42,7 +43,7 @@
         <button id="close-nav" class="absolute top-4 right-4 text-white text-2xl">
             <i class="fas fa-times"></i>
         </button>
-        <ul class="space-y-6 text-center">
+        <ul class="space-y-3 text-center">
             <li class="nav-item"><a href="/" class="nav-link">Inicio</a></li>
             <li class="nav-item"><a href="/quienes-somos/" class="nav-link">Quiénes Somos</a></li>
             <li class="nav-item"><a href="/catalogo/" class="nav-link">Catálogo</a></li>
@@ -56,18 +57,17 @@
             {% endif %}
         </ul>
     </nav>
-    <main id="barba-wrapper" class="container mx-auto py-24 lg:py-8">
-        <div class="barba-container">
-            {% block content %}
-            {% endblock %}
-        </div>
+    <main class="container mx-auto py-24 lg:py-8 animate__animated animate__fadeInUp">
+        {% block content %}
+        {% endblock %}
     </main>
-    <footer class="bg-gray-800 text-white py-4 fixed bottom-0 w-full">
+    <footer class="bg-gray-800 text-white py-4 animate__animated animate__fadeInUp">
         <p class="text-center">&copy; 2024 RJ Productos de Aseo. Todos los derechos reservados.</p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
     <script>
         document.getElementById('nav-toggle').onclick = function() {
             var navContent = document.getElementById('nav-content');
@@ -89,6 +89,7 @@
             }
         });
 
+        // Cambiar entre el menú de hamburguesa y el menú normal basado en el tamaño de la ventana
         function checkWindowSize() {
             var navContent = document.getElementById('nav-content');
             var mainNav = document.getElementById('main-nav');
@@ -103,26 +104,6 @@
 
         window.onresize = checkWindowSize;
         window.onload = checkWindowSize;
-
-        // Barba.js transitions
-        barba.init({
-            transitions: [{
-                name: 'modern-transition',
-                leave(data) {
-                    return gsap.to(data.current.container, {
-                        opacity: 0,
-                        duration: 0.3,
-                        onComplete: () => data.current.container.remove()
-                    });
-                },
-                enter(data) {
-                    return gsap.from(data.next.container, {
-                        opacity: 0,
-                        duration: 0.3
-                    });
-                }
-            }]
-        });
     </script>
     {% block extra_js %}
     {% endblock %}
