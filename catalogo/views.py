@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto, Categoria, ProductoImagen, Interes, Usuario
+from .models import Producto, Categoria, ProductoImagen, Interes
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .forms import ProductoForm, ProductoImagenForm, CategoriaForm
+from .forms import ProductoForm, ProductoImagenForm, CategoriaForm, InteresForm
 from django.forms import modelformset_factory
 from django.contrib.auth import logout
 
 def index(request):
-    productos = Producto.objects.all().order_by('?')[:4]  # Muestra 4 productos aleatorios
-    return render(request, 'catalogo/index.html', {'productos': productos})
+    productos = Producto.objects.all().order_by('?')[:4]
+    intereses = Interes.objects.all().order_by('-fecha')[:4]  # Mostramos los últimos 4 intereses
+    form = InteresForm()
+    return render(request, 'catalogo/index.html', {'productos': productos, 'intereses': intereses, 'form': form})
 
 def quienes_somos(request):
     return render(request, 'catalogo/quienes_somos.html')
@@ -49,14 +51,13 @@ def admin_categorias(request):
     categorias = Categoria.objects.all()
     return render(request, 'catalogo/admin_categorias.html', {'categorias': categorias})
 
-def interes(request):
+def agregar_interes(request):
     if request.method == 'POST':
-        usuario = Usuario.objects.get(email=request.POST['email'])
-        producto = Producto.objects.get(id=request.POST['producto_id'])
-        comentario = request.POST['comentario']
-        Interes.objects.create(usuario=usuario, producto=producto, comentarios=comentario)
-        return redirect('index')
-    return render(request, 'catalogo/interes.html')
+        form = InteresForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    return redirect('index')
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)

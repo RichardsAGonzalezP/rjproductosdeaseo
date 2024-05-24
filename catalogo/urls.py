@@ -15,9 +15,8 @@ urlpatterns = [
     path('crear-categoria/', views.crear_categoria, name='crear_categoria'),
     path('editar-categoria/<int:id>/', views.editar_categoria, name='editar_categoria'),
     path('eliminar-categoria/<int:id>/', views.eliminar_categoria, name='eliminar_categoria'),
-    path('interes/', views.interes, name='interes'),
+    path('agregar-interes/', views.agregar_interes, name='agregar_interes'),
     path('profile/', views.profile, name='profile'),
     path('logout_confirm/', views.logout_confirm, name='logout_confirm'),
     path('login/', LoginView.as_view(template_name='catalogo/login.html'), name='login'),
-    
 ]

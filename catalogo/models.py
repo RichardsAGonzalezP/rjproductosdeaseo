@@ -1,4 +1,3 @@
-# models.py en catalogo/
 from django.db import models
 
 class Categoria(models.Model):
@@ -31,9 +30,11 @@ class Usuario(models.Model):
         return self.nombre
 
 class Interes(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=255, default='Nombre Predeterminado')
+    email = models.EmailField(default='example@example.com')
+    producto_deseado = models.CharField(max_length=255)
     comentarios = models.TextField()
+    fecha = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.usuario.nombre} interesado en {self.producto.nombre}"
+        return f"Interes de {self.nombre} en {self.producto_deseado}"

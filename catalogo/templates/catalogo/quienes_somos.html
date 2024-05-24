@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="bg-gray-100 min-h-screen pt-12"> <!-- Ajuste aquí -->
-    <div class="container mx-auto py-8">
+    <div class="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div class="bg-white shadow-md rounded-lg p-10 text-center">
             <img src="{% static 'catalogo/images/logo.png' %}" alt="Logo" class="h-20 w-20 mx-auto mb-4 rounded-full logo">
             <h1 class="text-4xl font-bold text-gray-800">Quiénes Somos</h1>
@@ -79,10 +79,10 @@
 
         // Animaciones para el logo
         timeline.from('.logo', { opacity: 0, scale: 0, duration: 1 });
-        timeline.from('.animate__fadeInDown', { y: -20, opacity: 0, duration: 1 }, "-=0.5");
-        timeline.from('.animate__fadeInUp', { y: 20, opacity: 0, duration: 1 }, "-=0.5");
-        timeline.from('.mission', { opacity: 0, scale: 0.8, duration: 1 }, "-=0.5");
-        timeline.from('.vision', { opacity: 0, scale: 0.8, duration: 1 }, "-=0.5");
+        timeline.from('.animate__fadeInDown', { y: -20, opacity: 0, duration: 0.7 }, "-=0.5");
+        timeline.from('.animate__fadeInUp', { y: 20, opacity: 0, duration: 0.7 }, "-=0.5");
+        timeline.from('.mission', { x: -50, opacity: 0, scale: 0.8, duration: 0.7 }, "-=0.5");
+        timeline.from('.vision', { x: 50, opacity: 0, scale: 0.8, duration: 0.7 }, "-=0.5");
         timeline.from('.value-box', { opacity: 0, scale: 0.8, stagger: 0.2, duration: 1 }, "-=0.5");
 
         // Animación constante para el logo
