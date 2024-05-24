@@ -11,6 +11,8 @@ class Producto(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     descripcion = models.TextField()
+    tamaño = models.CharField(max_length=50, default='1L')  # Valor predeterminado para el tamaño
+    aroma = models.CharField(max_length=50, default='Sin aroma')  # Valor predeterminado para el aroma
 
     def __str__(self):
         return self.nombre

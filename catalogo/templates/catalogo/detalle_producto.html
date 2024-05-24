@@ -1,17 +1,27 @@
-<!-- catalogo/templates/catalogo/crear_producto.html -->
 {% extends 'catalogo/base.html' %}
 {% load static %}
 {% block content %}
 <div class="container mx-auto px-4 py-12 common-container">
-    <h1 class="text-3xl font-bold text-center mb-6">Crear Producto</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <div class="text-center mt-4">
-            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Guardar</button>
-            <a href="{% url 'admin_productos' %}" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">Cancelar</a>
+    <h1 class="text-3xl font-bold text-center mb-6">Detalle del Producto</h1>
+    <div class="bg-white rounded-lg shadow-lg p-6">
+        <h2 class="text-2xl font-bold mb-4">{{ producto.nombre }}</h2>
+        <p><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
+        <p><strong>Precio:</strong> ${{ producto.precio|floatformat:2 }}</p>
+        <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+        <p><strong>Tamaño:</strong> {{ producto.tamaño }}</p>
+        <p><strong>Aroma:</strong> {{ producto.aroma }}</p>
+        <div class="mt-4">
+            <h3 class="text-xl font-bold mb-2">Imágenes:</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {% for imagen in producto.imagenes.all %}
+                    <img src="{{ imagen.imagen.url }}" alt="Imagen de {{ producto.nombre }}" class="w-full h-auto rounded-lg shadow-lg">
+                {% endfor %}
+            </div>
         </div>
-    </form>
+        <div class="text-center mt-6">
+            <a href="{% url 'admin_productos' %}" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">Volver</a>
+        </div>
+    </div>
 </div>
 {% endblock %}
 {% block extra_css %}
@@ -19,26 +29,4 @@
 {% endblock %}
 {% block extra_js %}
 <script src="{% static 'catalogo/js/crear_productos.js' %}"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const precioInput = document.querySelector('input[name="precio"]');
-        precioInput.addEventListener('input', function() {
-            if (precioInput.value < 0) {
-                precioInput.value = 0;
-            }
-        });
-
-        const fileInput = document.querySelector('input[type="file"]');
-        const clearButton = document.createElement('button');
-        clearButton.textContent = 'Borrar Imagen';
-        clearButton.type = 'button';
-        clearButton.style.marginTop = '10px';
-
-        clearButton.addEventListener('click', function() {
-            fileInput.value = '';
-        });
-
-        fileInput.insertAdjacentElement('afterend', clearButton);
-    });
-</script>
 {% endblock %}

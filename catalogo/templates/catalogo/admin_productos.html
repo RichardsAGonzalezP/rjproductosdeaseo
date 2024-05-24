@@ -2,40 +2,46 @@
 {% load static %}
 {% block content %}
 <div class="container mx-auto px-4 py-12 common-container">
-    <h1 class="text-3xl font-bold text-center mb-6">Administrar Productos</h1>
+    <h1 class="text-3xl font-bold text-center mb-6 mt-10">Administrar Productos</h1> <!-- Agregado mt-10 para margen superior -->
     <div class="text-right mb-4">
         <a href="{% url 'crear_producto' %}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300">Crear Producto</a>
     </div>
-    <table class="min-w-full bg-white rounded-lg shadow-lg overflow-hidden">
-        <thead class="bg-gray-800 text-white">
-            <tr>
-                <th class="w-1/6 py-3 px-4 uppercase font-semibold text-sm">Producto</th>
-                <th class="w-1/6 py-3 px-4 uppercase font-semibold text-sm">Categoría</th>
-                <th class="w-1/6 py-3 px-4 uppercase font-semibold text-sm">Precio</th>
-                <th class="w-1/6 py-3 px-4 uppercase font-semibold text-sm">Descripción</th>
-                <th class="w-1/6 py-3 px-4 uppercase font-semibold text-sm">Imágenes</th>
-                <th class="w-1/6 py-3 px-4 uppercase font-semibold text-sm">Acciones</th>
-            </tr>
-        </thead>
-        <tbody class="text-gray-700">
-            {% for item in productos_con_imagenes %}
-                <tr class="border-b border-gray-200 transition duration-300 hover:bg-gray-100">
-                    <td class="w-1/6 py-3 px-4">{{ item.producto.nombre }}</td>
-                    <td class="w-1/6 py-3 px-4">{{ item.producto.categoria.nombre }}</td>
-                    <td class="w-1/6 py-3 px-4">{{ item.producto.precio|floatformat:2 }}</td>
-                    <td class="w-1/6 py-3 px-4">{{ item.producto.descripcion }}</td>
-                    <td class="w-1/6 py-3 px-4">
-                        {% for imagen in item.imagenes %}
-                            <img src="{{ imagen.imagen.url }}" alt="Imagen de {{ item.producto.nombre }}" class="w-16 h-16 object-cover inline-block mr-1 mb-1 rounded">
-                        {% endfor %}
-                    </td>
-                    <td class="w-1/6 py-3 px-4 flex items-center justify-around">
-                        <a href="{% url 'editar_producto' item.producto.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">Editar</a>
-                        <a href="{% url 'eliminar_producto' item.producto.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Eliminar</a>
-                    </td>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white rounded-lg shadow-lg overflow-hidden">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="w-1/8 py-3 px-4 uppercase font-semibold text-sm">Producto</th>
+                    <th class="w-1/8 py-3 px-4 uppercase font-semibold text-sm">Categoría</th>
+                    <th class="w-1/8 py-3 px-4 uppercase font-semibold text-sm">Precio</th>
+                    <th class="w-1/8 py-3 px-4 uppercase font-semibold text-sm">Tamaño</th>
+                    <th class="w-1/8 py-3 px-4 uppercase font-semibold text-sm">Aroma</th>
+                    <th class="w-1/8 py-3 px-4 uppercase font-semibold text-sm">Descripción</th>
+                    <th class="w-1/8 py-3 px-4 uppercase font-semibold text-sm">Imágenes</th>
+                    <th class="w-1/8 py-3 px-4 uppercase font-semibold text-sm">Acciones</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody class="text-gray-700">
+                {% for item in productos_con_imagenes %}
+                    <tr class="border-b border-gray-200 transition duration-300 hover:bg-gray-100">
+                        <td class="w-1/8 py-3 px-4">{{ item.producto.nombre }}</td>
+                        <td class="w-1/8 py-3 px-4">{{ item.producto.categoria.nombre }}</td>
+                        <td class="w-1/8 py-3 px-4">{{ item.producto.precio|floatformat:2 }}</td>
+                        <td class="w-1/8 py-3 px-4">{{ item.producto.tamaño }}</td>
+                        <td class="w-1/8 py-3 px-4">{{ item.producto.aroma }}</td>
+                        <td class="w-1/8 py-3 px-4">{{ item.producto.descripcion }}</td>
+                        <td class="w-1/8 py-3 px-4">
+                            {% for imagen in item.imagenes %}
+                                <img src="{{ imagen.imagen.url }}" alt="Imagen de {{ item.producto.nombre }}" class="w-16 h-16 object-cover inline-block mr-1 mb-1 rounded">
+                            {% endfor %}
+                        </td>
+                        <td class="w-1/8 py-3 px-4 flex items-center justify-around">
+                            <a href="{% url 'editar_producto' item.producto.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">Editar</a>
+                            <a href="{% url 'eliminar_producto' item.producto.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

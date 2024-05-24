@@ -37,8 +37,10 @@
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
                     </div>
-                    <div class="p-4">
-                        <h2 class="text-lg font-bold">{{ producto.nombre }}</h2>
+                    <div class="p-4 text-center">
+                        <h2 class="text-lg font-bold text-xl">{{ producto.nombre }}</h2>
+                        <p class="aroma-size"><strong>Aroma:</strong> {{ producto.aroma }}</p>
+                        <p class="aroma-size"><strong>Tamaño:</strong> {{ producto.tamaño }}</p>
                         <p class="description">{{ producto.descripcion }}</p>
                         <p class="price text-blue-600">${{ producto.precio }}</p>
                     </div>
@@ -82,7 +84,7 @@
                         prevEl: swiper.querySelector('.swiper-button-prev'),
                     },
                     autoplay: {
-                        delay: 4000, // Duración ajustada a 5 segundos
+                        delay: 4000,
                         disableOnInteraction: false,
                     },
                 });

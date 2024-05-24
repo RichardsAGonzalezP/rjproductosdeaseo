@@ -6,11 +6,13 @@ from crispy_forms.layout import Submit
 class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
-        fields = ['nombre', 'categoria', 'precio', 'descripcion']
+        fields = ['nombre', 'categoria', 'precio', 'descripcion', 'tamaño', 'aroma']
         widgets = {
             'nombre': forms.TextInput(attrs={'placeholder': 'Ingrese el nombre del producto'}),
             'precio': forms.NumberInput(attrs={'placeholder': 'Ingrese el valor', 'min': 0}),
             'descripcion': forms.Textarea(attrs={'placeholder': 'Ingrese la descripción del producto', 'rows': 5}),
+            'tamaño': forms.TextInput(attrs={'placeholder': 'Ingrese el tamaño del producto'}),
+            'aroma': forms.TextInput(attrs={'placeholder': 'Ingrese el aroma del producto'}),
         }
 
 class ProductoImagenForm(forms.ModelForm):

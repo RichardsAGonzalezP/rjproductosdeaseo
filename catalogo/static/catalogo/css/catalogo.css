@@ -56,7 +56,13 @@ body {
 }
 
 .product-card h2 {
+    font-size: 1.5rem; /* Incrementar el tamaño de la fuente */
     font-weight: bold; /* Añadir negrita */
+}
+
+.aroma-size {
+    font-size: 1.3rem; /* Incrementar el tamaño de la fuente */
+    color: #000; /* Establecer color negro */
 }
 
 /* Modal Styles */
