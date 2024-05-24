@@ -15,11 +15,6 @@ body {
     text-align: center; /* Centrar el texto */
 }
 
-.filter-button:focus + #filterMenu,
-#filterMenu:hover {
-    display: block;
-}
-
 #filterMenu {
     position: absolute;
     left: 50%;
@@ -49,6 +44,22 @@ body {
     display: none;
 }
 
+.product-card p.description {
+    color: #555;
+    font-size: 1.2rem; /* Ajustado a 1.2rem para mejor legibilidad */
+}
+
+.product-card p.price {
+    color: #1A73E8; /* Color azul para el precio */
+    font-size: 1.4rem; /* Ajustado a 1.4rem */
+    font-weight: bold; /* Añadir negrita */
+}
+
+.product-card h2 {
+    font-weight: bold; /* Añadir negrita */
+}
+
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -104,4 +115,18 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
 }

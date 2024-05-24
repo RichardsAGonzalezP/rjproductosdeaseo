@@ -64,10 +64,14 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        var swiperInstances = [];
+
         function initializeSwipers() {
+            swiperInstances.forEach(instance => instance.destroy(true, true));
+            swiperInstances = [];
             var swipers = document.querySelectorAll('.swiper-container');
             swipers.forEach(function(swiper) {
-                new Swiper(swiper, {
+                var instance = new Swiper(swiper, {
                     loop: true,
                     pagination: {
                         el: swiper.querySelector('.swiper-pagination'),
@@ -78,10 +82,11 @@
                         prevEl: swiper.querySelector('.swiper-button-prev'),
                     },
                     autoplay: {
-                        delay: 2000, // Duración ajustada para la primera imagen
+                        delay: 5000, // Duración ajustada a 5 segundos
                         disableOnInteraction: false,
                     },
                 });
+                swiperInstances.push(instance);
             });
         }
 
@@ -127,7 +132,7 @@
                 document.querySelectorAll('.product-card').forEach(card => {
                     if (filter === 'all' || card.getAttribute('data-category') === filter) {
                         card.style.display = 'block';
-                        card.style.animation = 'fadeIn 0.5s ease-in-out';
+                        card.classList.add('fade-in');
                     } else {
                         card.style.display = 'none';
                     }
@@ -138,7 +143,7 @@
                 } else {
                     updateFilterButtonText(this.textContent);
                 }
-                initializeSwipers(); // Volver a inicializar Swiper después de filtrar
+                setTimeout(initializeSwipers, 50); // Volver a inicializar Swiper después de filtrar con un pequeño retraso
             });
         });
 
