@@ -1,15 +1,14 @@
-<!-- catalogo/templates/catalogo/eliminar_imagen.html -->
 {% extends 'catalogo/base.html' %}
 {% load static %}
 {% block content %}
 <div class="container mx-auto px-4 py-12 common-container">
-    <h1 class="text-3xl font-bold text-center mb-6">Eliminar Imagen</h1>
-    <p class="text-center mb-4">¿Está seguro que desea eliminar esta imagen?</p>
+    <h1 class="text-3xl font-bold text-center mb-6">Eliminar Producto</h1>
+    <p class="text-center mb-4">¿Está seguro que desea eliminar este producto?</p>
     <form method="post">
         {% csrf_token %}
         <div class="text-center">
             <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Eliminar</button>
-            <a href="{% url 'editar_producto' imagen.producto.id %}" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">Cancelar</a>
+            <a href="{% url 'editar_producto' producto.id %}" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">Cancelar</a>
         </div>
     </form>
 </div>

@@ -1,7 +1,5 @@
-/* archivo: static/catalogo/css/crear_categoria.css */
-
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background: #f5f5f5;
     margin: 0;
     padding: 0;
@@ -12,6 +10,7 @@ h1 {
     font-family: 'Lora', serif;
     font-size: 2em;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 form {
@@ -51,4 +50,14 @@ form .btn-secondary {
 
 form .btn-secondary:hover {
     background-color: #5a6268;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }

@@ -13,6 +13,19 @@
     <link rel="stylesheet" href="{% static 'catalogo/css/base.css' %}">
     {% block extra_css %}
     {% endblock %}
+    <style>
+        /* Ocultar el contenido inicialmente */
+        body {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s linear 0.3s, opacity 0.3s ease-in-out;
+        }
+        body.loaded {
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0s;
+        }
+    </style>
 </head>
 <body class="bg-gray-100 text-gray-800 font-roboto">
     <header id="header" class="bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg fixed w-full z-10 top-0 left-0 animate__animated animate__fadeInDown">
@@ -22,16 +35,16 @@
                 <span id="company-name" class="ml-3 text-lg font-bold">RJ Productos de Aseo</span>
             </div>
             <nav id="main-nav" class="hidden lg:flex space-x-4">
-                <a href="/" class="nav-link">Inicio</a>
-                <a href="/quienes-somos/" class="nav-link">Quiénes Somos</a>
-                <a href="/catalogo/" class="nav-link">Catálogo</a>
+                <a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">Inicio</a>
+                <a href="/quienes-somos/" class="nav-link {% if request.path == '/quienes-somos/' %}active{% endif %}">Quiénes Somos</a>
+                <a href="/catalogo/" class="nav-link {% if request.path == '/catalogo/' %}active{% endif %}">Catálogo</a>
                 {% if user.is_authenticated %}
-                    <a href="/profile/" class="nav-link">Perfil</a>
-                    <a href="/admin-productos/" class="nav-link">Administrar Productos</a>
-                    <a href="/admin-categorias/" class="nav-link">Administrar Categorías</a>
-                    <a href="/logout_confirm/" class="nav-link">Cerrar Sesión</a>
+                    <a href="/profile/" class="nav-link {% if request.path == '/profile/' %}active{% endif %}">Perfil</a>
+                    <a href="/admin-productos/" class="nav-link {% if request.path == '/admin-productos/' %}active{% endif %}">Administrar Productos</a>
+                    <a href="/admin-categorias/" class="nav-link {% if request.path == '/admin-categorias/' %}active{% endif %}">Administrar Categorías</a>
+                    <a href="{% url 'logout_confirm' %}" class="nav-link {% if request.path == '/logout_confirm/' %}active{% endif %}">Cerrar Sesión</a>
                 {% else %}
-                    <a href="/login/" class="nav-link">Iniciar Sesión</a>
+                    <a href="/login/" class="nav-link {% if request.path == '/login/' %}active{% endif %}">Iniciar Sesión</a>
                 {% endif %}
             </nav>
             <button id="nav-toggle" class="lg:hidden px-2 py-1 border rounded text-white border-white hover:text-white hover:border-white transition duration-300 transform hover:scale-110">
@@ -44,16 +57,16 @@
             <i class="fas fa-times"></i>
         </button>
         <ul class="space-y-3 text-center">
-            <li class="nav-item"><a href="/" class="nav-link">Inicio</a></li>
-            <li class="nav-item"><a href="/quienes-somos/" class="nav-link">Quiénes Somos</a></li>
-            <li class="nav-item"><a href="/catalogo/" class="nav-link">Catálogo</a></li>
+            <li class="nav-item"><a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">Inicio</a></li>
+            <li class="nav-item"><a href="/quienes-somos/" class="nav-link {% if request.path == '/quienes-somos/' %}active{% endif %}">Quiénes Somos</a></li>
+            <li class="nav-item"><a href="/catalogo/" class="nav-link {% if request.path == '/catalogo/' %}active{% endif %}">Catálogo</a></li>
             {% if user.is_authenticated %}
-                <li class="nav-item"><a href="/profile/" class="nav-link">Perfil</a></li>
-                <li class="nav-item"><a href="/admin-productos/" class="nav-link">Administrar Productos</a></li>
-                <li class="nav-item"><a href="/admin-categorias/" class="nav-link">Administrar Categorías</a></li>
-                <li class="nav-item"><a href="/logout_confirm/" class="nav-link">Cerrar Sesión</a></li>
+                <li class="nav-item"><a href="/profile/" class="nav-link {% if request.path == '/profile/' %}active{% endif %}">Perfil</a></li>
+                <li class="nav-item"><a href="/admin-productos/" class="nav-link {% if request.path == '/admin-productos/' %}active{% endif %}">Administrar Productos</a></li>
+                <li class="nav-item"><a href="/admin-categorias/" class="nav-link {% if request.path == '/admin-categorias/' %}active{% endif %}">Administrar Categorías</a></li>
+                <li class="nav-item"><a href="{% url 'logout_confirm' %}" class="nav-link {% if request.path == '/logout_confirm/' %}active{% endif %}">Cerrar Sesión</a></li>
             {% else %}
-                <li class="nav-item"><a href="/login/" class="nav-link">Iniciar Sesión</a></li>
+                <li class="nav-item"><a href="/login/" class="nav-link {% if request.path == '/login/' %}active{% endif %}">Iniciar Sesión</a></li>
             {% endif %}
         </ul>
     </nav>
@@ -61,7 +74,7 @@
         {% block content %}
         {% endblock %}
     </main>
-    <footer class="bg-gray-800 text-white py-4 animate__animated animate__fadeInUp">
+    <footer class="bg-gray-800 text-white py-4 animate__animated animate__fadeInUp fixed bottom-0 w-full">
         <p class="text-center">&copy; 2024 RJ Productos de Aseo. Todos los derechos reservados.</p>
     </footer>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -103,7 +116,10 @@
         }
 
         window.onresize = checkWindowSize;
-        window.onload = checkWindowSize;
+        window.onload = function() {
+            checkWindowSize();
+            document.body.classList.add('loaded');
+        }
     </script>
     {% block extra_js %}
     {% endblock %}

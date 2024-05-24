@@ -19,5 +19,5 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('logout_confirm/', views.logout_confirm, name='logout_confirm'),
     path('login/', LoginView.as_view(template_name='catalogo/login.html'), name='login'),
-    path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
+    
 ]

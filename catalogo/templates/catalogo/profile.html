@@ -1,14 +1,29 @@
 {% extends "catalogo/base.html" %}
 {% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'catalogo/css/profile.css' %}">
+{% endblock %}
+
 {% block content %}
-<div class="text-center py-8">
-    <h1 class="text-4xl font-bold text-gray-800">Perfil</h1>
-    <p class="text-xl text-gray-600 mt-4">Bienvenido, {{ user.username }}.</p>
-    <a href="{% url 'logout_confirm' %}" class="mt-4 inline-block p-2 bg-red-500 text-white rounded-md">Cerrar Sesión</a>
+<div class="container mx-auto py-8 flex-grow">
+    <div class="bg-white p-6 rounded-lg shadow-lg animate__animated animate__fadeIn">
+        <h1 class="text-2xl font-bold mb-4">Perfil de Usuario</h1>
+        <p class="mb-4">Nombre de usuario: {{ user.username }}</p>
+        <a href="{% url 'password_change' %}" class="bg-blue-500 text-white px-4 py-2 rounded button">Cambiar Contraseña</a>
+        <a href="{% url 'logout_confirm' %}" class="bg-red-500 text-white px-4 py-2 rounded button">Cerrar Sesión</a>
+    </div>
 </div>
 {% endblock %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'catalogo/css/profile.css' %}">
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.style.opacity = 1;
+    });
+
+    window.addEventListener('beforeunload', function() {
+        document.body.style.opacity = 0;
+    });
+</script>
 {% endblock %}

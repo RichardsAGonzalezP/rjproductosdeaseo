@@ -16,6 +16,13 @@ header .flex.items-center img:hover {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
+.nav-link.active {
+    color: yellow; /* Cambiar el color del enlace activo */
+    border-bottom: 2px solid yellow; /* Línea inferior para resaltar el enlace activo */
+    font-weight: bold; /* Texto en negrita para el enlace activo */
+}
+
+
 h1, h2 {
     animation: fadeIn 1s ease-in-out;
 }

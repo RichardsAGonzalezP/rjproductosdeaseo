@@ -1,3 +1,10 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .container {
     animation: fadeIn 1s ease-in-out;
 }
@@ -13,8 +20,34 @@
 
 h1 {
     animation: fadeInDown 1s ease-in-out;
+    margin-top: 20px; /* Añadir margen superior para separar del encabezado */
 }
 
-.form {
+p {
     animation: fadeInUp 1s ease-in-out;
+}
+
+button, a {
+    display: inline-block;
+    margin-right: 10px;
+    animation: fadeInUp 1s ease-in-out;
+    transition: transform 0.3s;
+}
+
+button:hover, a:hover {
+    transform: scale(1.05);
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
