@@ -44,6 +44,20 @@ body {
     display: none;
 }
 
+.product-card {
+    padding: 20px;
+}
+
+.product-card h2 {
+    font-weight: bold;
+    font-size: 1.5rem; /* Ajustado a 1.5rem para mejor legibilidad */
+}
+
+.product-card p.aroma-size {
+    font-size: 1.2rem; /* Ajustado a 1.2rem para mejor legibilidad */
+    color: black; /* Color negro para el aroma y tamaño */
+}
+
 .product-card p.description {
     color: #555;
     font-size: 1.2rem; /* Ajustado a 1.2rem para mejor legibilidad */
@@ -53,16 +67,6 @@ body {
     color: #1A73E8; /* Color azul para el precio */
     font-size: 1.4rem; /* Ajustado a 1.4rem */
     font-weight: bold; /* Añadir negrita */
-}
-
-.product-card h2 {
-    font-size: 1.5rem; /* Incrementar el tamaño de la fuente */
-    font-weight: bold; /* Añadir negrita */
-}
-
-.aroma-size {
-    font-size: 1.3rem; /* Incrementar el tamaño de la fuente */
-    color: #000; /* Establecer color negro */
 }
 
 /* Modal Styles */
@@ -135,4 +139,22 @@ body {
 
 .fade-in {
     animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Ajuste de la paginación del Swiper */
+.swiper-pagination {
+    bottom: 10px;
+    text-align: center;
+}
+
+.swiper-pagination .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: #000;
+    opacity: 0.2;
+}
+
+.swiper-pagination .swiper-pagination-bullet-active {
+    background: #007bff;
+    opacity: 1;
 }
